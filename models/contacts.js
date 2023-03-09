@@ -41,7 +41,7 @@ async function addContact(body) {
 const updateContact = async (id, body) => {
   const contacts = await listContacts();
   const idx = contacts.findIndex(item => item.id === id);
-  if (id === -1) {
+  if (idx === -1) {
     return null;
   };
   contacts[idx] = { ...body, id };
