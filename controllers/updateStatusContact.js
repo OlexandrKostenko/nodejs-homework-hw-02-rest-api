@@ -1,16 +1,15 @@
 const { Contact } = require('../models/contact');
 
-const getContactById = async (req, res) => {
+const updateStatusContact = async (req, res) => {
     const { id } = req.params;
-  const result = await Contact.findById(id);
-  console.log(result);
+    const { favorite } = req.body;
+    const result = await Contact.findByIdAndUpdate(id, {favorite}, {new:true});
     if (!result) {
       res.status(404).json({
         status: "error",
         code: 404,
-        message: "Not found"
+        message: "Not Found"
       })
-      return
     }
     res.json({
       status: "success",
@@ -19,6 +18,6 @@ const getContactById = async (req, res) => {
         result
       }
     })
-  } 
+  }
 
-module.exports = getContactById;
+module.exports = updateStatusContact;
