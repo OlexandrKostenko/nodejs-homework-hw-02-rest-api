@@ -1,4 +1,5 @@
 const { User } = require('../../models');
+require("dotenv").config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -29,7 +30,7 @@ const login = async (req, res) => {
     };
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '2h' });
     await User.findByIdAndUpdate(user._id, { token });
-    const { subscription } = req.user;
+    const { subscription } = user;
     res.json({
         status: 'success',
         code: 200,
