@@ -6,7 +6,7 @@ const { SECRET_KEY } = process.env;
 const auth = async(req, res, next) => {
     const { authorization = '' } = req.headers;
     const [bearer, token] = authorization.split(' ');
-    if (bearer !== 'Bearer') {
+    if (bearer !== 'Bearer' || !token) {
         res.status(401).json({
         status: "error",
         code: 401,
