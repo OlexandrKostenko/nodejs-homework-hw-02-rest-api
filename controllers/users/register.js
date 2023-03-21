@@ -1,6 +1,8 @@
 const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
+const { v4 } = require('uuid');
+const sendEmail = require('../../middlewares/sendEmail');
 
 const register = async (req, res) => {
     const { email, password, subscription } = req.body;
@@ -15,7 +17,15 @@ const register = async (req, res) => {
     }
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const avatarURL = gravatar.url(email);
-  const result = await User.create({email, password: hashPassword, subscription, avatarURL});
+  const verificationToken = v4();
+  const result = await User.create({ email, password: hashPassword, subscription, avatarURL, verificationToken });
+  const mail = {
+    to: email,
+    subject: "Verificate your email",
+    html: `<a href="http://localhost:3000/users/verify/${verificationToken}" target="_blank">Touch here to verify your email</a>`,
+  };
+  
+  await sendEmail(mail);
     res.status(201).json({
       status: "success",
       code: 201,
