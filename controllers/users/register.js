@@ -2,7 +2,7 @@ const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
 const { v4 } = require('uuid');
-const sendEmail = require('../../middlewares/sendEmail');
+const sendEmail = require('../../services/sendEmail');
 
 const register = async (req, res) => {
     const { email, password, subscription } = req.body;
