@@ -7,5 +7,5 @@ module.exports = {
     validation,
     ctrlWrapper,
     auth,
-    upload
+    upload,
 }

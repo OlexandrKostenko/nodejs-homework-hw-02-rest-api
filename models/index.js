@@ -1,4 +1,4 @@
-const { User, userRegisterJoiSchema, userLoginJoiSchema, userSubscriptionJoiSchema } = require('./user');
+const { User, userRegisterJoiSchema, userLoginJoiSchema, userSubscriptionJoiSchema, verifyEmailJoiSchema } = require('./user');
 const { Contact, contactsJoiSchema } = require('./contact');
 
 module.exports = {
@@ -7,5 +7,6 @@ module.exports = {
     userRegisterJoiSchema,
     contactsJoiSchema,
     userLoginJoiSchema,
-    userSubscriptionJoiSchema
+    userSubscriptionJoiSchema, 
+    verifyEmailJoiSchema
 }
